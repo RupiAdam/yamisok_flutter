@@ -1,0 +1,261 @@
+name: yamisok
+description: Yamisok Mobile Application for find gamers
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 2.0.0-beta.0019+40
+
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+  # sdk: ">=1.19.0-dev.68.0 <3.0.0"
+  # http: ^0.12.0
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^0.1.2
+
+module:
+    androidX: true
+
+dependencies:
+  http: ^0.12.0+2
+  shared_preferences: any
+  flutter_tools: any
+  shimmer: ^1.0.0
+  flutter_html: ^0.11.1
+  # device_info: any
+  # easy_listview: ^0.1.3
+  cupertino_icons: ^0.1.2
+  carousel_slider: any
+  geolocator: ^5.1.4
+  # flutter_redux_dev_tools: "^0.3.0"
+  # redux_dev_tools: "^0.4.0"
+  flutter_redux: ^0.5.2
+  redux_epics: ^0.10.3
+  # rxdart: ^0.20.0
+  redux_thunk: ^0.2.0
+  expandable: ^3.0.0+1
+  pull_to_refresh: ^1.5.4
+  # flutter_swiper: ^1.1.6
+  datetime_picker_formfield: ^1.0.0
+
+  #deviceinfo
+  device_info: ^0.4.1+4
+
+  #soundplayer
+  audioplayers: ^0.13.2
+
+  #url launc
+  url_launcher: ^5.4.1
+
+
+  # Firebase
+  firebase_core: 0.4.0
+  firebase_analytics: ^3.0.1
+  firebase_crashlytics: ^0.1.3
+  firebase_messaging: 5.1.8
+  firebase_auth: 0.14.0
+  firebase_database: 3.1.0
+
+  google_sign_in: ^4.0.1+3
+  flutter_webview_plugin: ^0.3.7
+  connectivity: ^0.4.5+3
+
+  #facebook
+  flutter_facebook_login: ^3.0.0
+  facebook_analytics: ^0.1.4
+  
+  crypto: ^2.1.1
+  async: ^2.2.0
+  flutter_circular_chart: ^0.1.0
+
+  #notif
+  flushbar: ^1.9.1
+
+  # Image Related
+  image_picker: ^0.6.1+4
+  image_crop: ^0.3.1
+
+  # Share
+  share: ^0.6.3+4
+
+  # Cloudinary Open Source
+  cloudinary_client: 0.0.9
+
+# toast
+  fluttertoast: ^3.1.3
+
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+
+dev_dependencies:
+  flutter_driver:
+    sdk: flutter
+  test: any
+
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+  fonts:
+    - family: ProximaBold
+      fonts:
+        - asset: assets/fonts/Proxima-Bold.otf
+    - family: ProximaRegular
+      fonts:
+        - asset: assets/fonts/Proxima-Regular.otf
+    - family: YamiFont
+      fonts:
+        - asset: assets/fonts/YamiFontNew.ttf
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Light.ttf
+        - asset: assets/fonts/OpenSans-Semibold.ttf
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Regular.ttf
+        - asset: assets/fonts/Raleway-Semibold.ttf
+    - family: Oxygen
+      fonts:
+        - asset: assets/fonts/Oxygen-Italic.otf
+        - asset: assets/fonts/Oxygen-Bold.otf
+
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+   - assets/images/icon.png
+   - assets/images/chat.png
+   - assets/images/report.png
+   - assets/images/faq.png
+   - assets/images/leaderboard.png
+   - assets/images/logout.png
+   - assets/images/lucky.png
+   - assets/images/team.png
+
+   #profile
+   - assets/images/cookies.png
+   - assets/images/mission.png
+   - assets/images/crown.png
+   - assets/images/logo.png
+   - assets/images/fb_icon.png
+   - assets/images/g_icon.png
+
+
+  #categori
+   - assets/images/categori_Achievements.png
+   - assets/images/categori_Statistics.png
+   - assets/images/categori_MyCommunity.png
+   - assets/images/categori_MyPost.png
+   - assets/images/categori_GameConnect.png
+   - assets/images/categori_Team.png
+
+   #achivement
+   - assets/images/achivement1.png
+
+  #ver2 ======================
+
+  #home
+   - assets/images/new/backgroundhome.png
+   - assets/images/new/backgroundhome_new.png
+   - assets/images/new/pinlocation.gif
+   - assets/images/home/map_pin.png
+   - assets/images/home/male.png
+   - assets/images/home/female.png
+   - assets/images/home/addgame.png
+   - assets/images/home/featured.png
+
+
+  #game
+   - assets/images/game/frameconnect.png
+   - assets/images/game/scan.webp
+
+
+  #landing
+   - assets/images/landing/onboarding_1.png
+   - assets/images/landing/onboarding_2.png
+   - assets/images/landing/onboarding_3.png
+   - assets/images/landing/onboarding_4.png
+
+  #verification
+   - assets/images/verification/verification-email.png
+
+   # Chatting
+   - assets/images/chatting/emoji.png
+   - assets/images/chatting/send.png
+
+   #settings
+   - assets/images/settings/emoticon.png
+
+   # Coming Soon
+   - assets/images/comingsoon/comingsoon.png
+   - assets/images/comingsoon/team.jpg
+
+   # Profile
+   - assets/images/profile/defaultskill.png
+   - assets/images/profile/followers_active.png
+   - assets/images/profile/followers_inactive.png
+   - assets/images/profile/comment.png
+   - assets/images/profile/poke_active.png
+   - assets/images/profile/poke_inactive.png
+
+   # Sound
+   - assets/alert.mp3
+
+   # Default Image Png
+   - assets/images/smiley.png
+
+   # Coming Soon
+   - assets/images/noConnection.png
+   - assets/images/serverError.png
+
+
+
+
+
+
+
+  #  - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.io/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.io/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.io/custom-fonts/#from-packages

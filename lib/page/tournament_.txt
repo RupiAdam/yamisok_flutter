@@ -1,0 +1,936 @@
+import 'package:flutter/material.dart';
+// import 'package:transparent_image/transparent_image.dart'; 
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:yamisok/model/Sample.dart';
+// import 'package:yamisok/model/listpost.dart'; 
+ 
+// Future<List<Post>> fetchPosts(http.Client client) async {
+//   final response = await client.get('https://jsonplaceholder.typicode.com/posts');
+ 
+//   return compute(parsePosts, response.body);
+// }
+
+// List<Post> parsePosts(String responseBody) {
+//   final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+ 
+//   return parsed.map<Post>((json) => Post.fromJson(json)).toList();
+// }
+
+
+const TextStyle dropDownLableStyle =
+    TextStyle(color: Colors.white, fontSize: 16.0);
+
+const TextStyle dropDownLableStylSsearch =
+    TextStyle(color: Colors.black, fontSize: 16.0);
+
+const TextStyle dropDownMenuItemStyle =
+    TextStyle(color: Colors.black, fontSize: 18.0);
+
+final Color disconBackgroundColor = Color(0xFFFFE08D);
+
+final Color flightBorderColor = Color(0xFFE6E6E6);
+final Color chipBackgroundColor = Color(0xFFF6F6F6);
+
+//fix background
+
+final Color backgroundPrimary = Color(0xFF151a1d);
+final Color backgroundSecond = Color(0xFF1e252b);
+final Color backgroundYellow = Color(0xFFffc800);
+
+//text
+final Color textColor1 = Color(0xFF95989a); //abu-abu
+
+Color fristColor = Color(0xFF1d2329);
+Color secondColor = Color(0xFF283441);
+final Color contentBackground = Color(0xFF151A1D);
+
+class maintournament extends StatefulWidget {
+  @override
+  _maintournamentstate createState() => _maintournamentstate();
+}
+
+class _maintournamentstate extends State<maintournament> {
+  @override
+  Widget build(BuildContext context) {
+    // final followMe = "Follow Me";
+    return Scaffold(
+      // appBar: AppBar(
+      //   title: Text("Seaching Result", style: dropDownLableStyle),
+      //   centerTitle: true,
+      //   leading: InkWell(
+      //       child: Icon(Icons.arrow_back),
+      //       onTap: () {
+      //         Navigator.pop(context);
+      //       }),
+      // ),
+      // body: BodyLayout()
+      body: Container(
+        color: backgroundPrimary,
+        child:
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child:
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              HeaderProfileFull(),
+              EditProfile(),
+              BodyLayout(),
+              // ListProfileFull(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class BodyLayout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return _myListView(context);
+  }
+}
+
+
+Widget _myListView(BuildContext context) {
+
+  final titles = ['Honda', 'Samsung', 'Chatime', 'Hypermart',
+  'Tempe', 'Jalan2', 'Panas', 'Baut', 'Baju'];
+
+  final icons = [Icons.directions_bike, Icons.directions_boat,
+  Icons.directions_bus, Icons.directions_car, Icons.directions_railway,
+  Icons.directions_run, Icons.directions_subway, Icons.directions_transit,
+  Icons.directions_walk];
+
+  var size = MediaQuery.of(context).size;
+ 
+  final double itemWidth = (size.width);
+  final double itemHeight = (size.height*2);
+
+ return 
+  new Container(
+    width: itemWidth,
+    color: backgroundYellow,
+    child:
+      Column(
+        children: [
+          Container(
+            child: Padding(
+              padding: EdgeInsets.all(8.0)
+            ),
+          ),
+          Container(
+            child: new ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return Card( //                           <-- Card widget
+                  child: ListTile(
+                    leading: Icon(icons[index]),
+                    title: Text(titles[index]),
+                  ),
+                );
+              },
+            ),
+          )
+        ]
+      )
+  );
+ 
+}
+
+
+class ListProfileFull extends StatefulWidget {
+  @override
+  _ListProfileFullState createState() => _ListProfileFullState();
+}
+
+class _ListProfileFullState extends State<ListProfileFull> {
+
+  List<Sample> list = List();
+  var isLoading = false;
+
+  _fetchData() async {
+    setState(() {
+      isLoading = true;
+    });
+    final response =
+        await http.get("https://jsonplaceholder.typicode.com/photos");
+    if (response.statusCode == 200) {
+      // print(json.decode(response.body));
+      list = (json.decode(response.body) as List)
+          .map((data) => new Sample.fromJson(data))
+          .toList();
+      setState(() {
+        isLoading = false;
+      });
+    } else {
+      throw Exception('Failed to load photos');
+    }
+  }
+
+  @override 
+  Widget build(BuildContext context) {
+    return 
+    Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              RaisedButton(
+                  child: new Text("Fetch Data"),
+                  onPressed: _fetchData,
+                ),
+                // Container(
+                //   child: isLoading
+                //     ? Center(
+                //         child: CircularProgressIndicator(),
+                //       )
+                //     : ListView.builder(
+                //         itemCount: list.length,
+                //         itemBuilder: (BuildContext context, int index) {
+                //           return ListTile(
+                //             contentPadding: EdgeInsets.all(10.0),
+                //             title: new Text(list[index].title),
+                //             trailing: new Image.network(
+                //               list[index].thumbnailUrl,
+                //               fit: BoxFit.cover,
+                //               height: 40.0,
+                //               width: 40.0,
+                //             ),
+                //           );
+                //         })
+                //   )
+              ],
+          ),
+    );
+
+
+// BARU NI
+
+  // Widget build(BuildContext context) {
+    // var size = MediaQuery.of(context).size;
+    
+    /*24 is for notification bar on Android*/
+    // final double itemHeight = (size.height - kToolbarHeight - 24) / 3;
+    // final double itemWidth = (size.width - 10);
+    // final double itemWidth2 = (size.width / 3) * 2;
+
+    // FutureBuilder<List<Post>>(
+    //     future: fetchPosts(http.Client()),
+    //     builder: (context, snapshot) {
+    //       if (snapshot.hasError) print(snapshot.error);
+ 
+    //       return snapshot.hasData
+    //           ? ListViewPosts(posts: snapshot.data)
+    //           : Center(child: CircularProgressIndicator());
+    //     },
+    //   );
+
+    // return Stack(
+    //   children: <Widget>[
+    //     Container(
+    //       padding: const EdgeInsets.all(5.0),
+    //       // padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+    //       color: Color(0xFF1FFFFF),
+    //       child: Column(
+    //         children: <Widget>[
+    //           new Container(
+    //             padding: const EdgeInsets.only(
+    //                 left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
+    //             height: 80,
+    //             width: itemWidth,
+    //             child: new Container(
+    //               decoration: new BoxDecoration( 
+    //                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    //               ),
+    //               child: ClipRRect(
+    //                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    //                   child: Container(
+    //                     color: Color(0xFF151a1d),
+    //                     child: new Image.network(
+    //                         "http://theelevationawards.com/wp-content/uploads/2016/04/Elevation-Awards-Logo-300x214.png"),
+    //                   )),
+    //             ),
+    //           ),
+    //           new Container(
+    //             padding: const EdgeInsets.only(
+    //                 left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
+    //             height: 80,
+    //             width: itemWidth,
+    //             child: new Container(
+    //               decoration: new BoxDecoration(
+    //                 // ,
+    //                 // border: new Border.all(
+    //                 //     color: Colors.green,
+    //                 //     width: 5.0,
+    //                 //     style: BorderStyle.solid
+    //                 // ),
+    //                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    //               ),
+    //               child: ClipRRect(
+    //                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    //                   child: Container(
+    //                     color: Color(0xFF151a1d),
+    //                     child: new Image.network(
+    //                         "http://theelevationawards.com/wp-content/uploads/2016/04/Elevation-Awards-Logo-300x214.png"),
+    //                   )),
+    //             ),
+    //           ),
+    //           new Container(
+    //             padding: const EdgeInsets.only(
+    //                 left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
+    //             height: 80,
+    //             width: itemWidth,
+    //             child: new Container(
+    //               decoration: new BoxDecoration( 
+    //                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    //               ),
+    //               child: ClipRRect(
+    //                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    //                   child: Container(
+    //                     color: Color(0xFF151a1d),
+    //                     child: new Image.network(
+    //                         "http://theelevationawards.com/wp-content/uploads/2016/04/Elevation-Awards-Logo-300x214.png"),
+    //                   )),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ],
+    // );
+  }
+}
+
+class HeaderProfileFull extends StatefulWidget {
+  @override
+  _HeaderProfileFullState createState() => _HeaderProfileFullState();
+}
+
+class _HeaderProfileFullState extends State<HeaderProfileFull> {
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
+    /*24 is for notification bar on Android*/
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 3;
+    final double itemWidth = (size.width - 10) / 3;
+    final double itemWidth2 = (size.width / 3) * 2;
+
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: const EdgeInsets.all(5.0),
+          // padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+          color: backgroundSecond,
+          child: Row(
+            children: <Widget>[
+              new Container(
+                padding: const EdgeInsets.only(
+                    left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
+                height: itemWidth,
+                width: itemWidth,
+                child: new Container(
+                  decoration: new BoxDecoration(
+                    // ,
+                    // border: new Border.all(
+                    //     color: Colors.green,
+                    //     width: 5.0,
+                    //     style: BorderStyle.solid
+                    // ),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      child: Container(
+                        color: Color(0xFF151a1d),
+                        child: new Image.network(
+                            "http://theelevationawards.com/wp-content/uploads/2016/04/Elevation-Awards-Logo-300x214.png"),
+                      )),
+                ),
+              ),
+              new Container(
+                padding: const EdgeInsets.only(
+                    left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
+                height: itemWidth,
+                width: itemWidth,
+                child: new Container(
+                  decoration: new BoxDecoration(
+                    // ,
+                    // border: new Border.all(
+                    //     color: Colors.green,
+                    //     width: 5.0,
+                    //     style: BorderStyle.solid
+                    // ),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      child: Container(
+                        color: Color(0xFF151a1d),
+                        child: new Image.network(
+                            "http://theelevationawards.com/wp-content/uploads/2016/04/Elevation-Awards-Logo-300x214.png"),
+                      )),
+                ),
+              ),
+              new Container(
+                padding: const EdgeInsets.only(
+                    left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
+                height: itemWidth,
+                width: itemWidth,
+                child: new Container(
+                  decoration: new BoxDecoration(
+                    // ,
+                    // border: new Border.all(
+                    //     color: Colors.green,
+                    //     width: 5.0,
+                    //     style: BorderStyle.solid
+                    // ),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      child: Container(
+                        color: Color(0xFF151a1d),
+                        child: new Image.network(
+                            "http://theelevationawards.com/wp-content/uploads/2016/04/Elevation-Awards-Logo-300x214.png"),
+                      )),
+                ),
+              ),
+
+              //  new Container(
+              //    padding: const EdgeInsets.all(10.0),
+              //    height: itemWidth,
+              //    width: itemWidth2,
+              //    child: new Container(
+              //      decoration: new BoxDecoration(
+              //        color: contentBackground,
+              //        // border: new Border.all(
+              //        //     color: Colors.green,
+              //        //     width: 5.0,
+              //        //     style: BorderStyle.solid
+              //        // ),
+              //        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              //      ),
+              //      child: ClipRRect(
+              //        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              //          child: new Image.network(
+              //              "https://res.cloudinary.com/yamisok/image/upload/v1523937089/profile/skwqq3grrxcpf4tybsim.jpg")),
+              //    ),
+              //  ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class EditProfile extends StatefulWidget {
+  @override
+  _EditProfileState createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+
+  List<Sample> list = List();
+  var isLoading = false;
+
+  _fetchData() async {
+    setState(() {
+      isLoading = true;
+    });
+    final response =
+        await http.get("https://jsonplaceholder.typicode.com/photos");
+    if (response.statusCode == 200) {
+      var decode = json.decode(response.body);
+      print(decode);
+      list = (json.decode(response.body) as List)
+          .map((data) => new Sample.fromJson(data))
+          .toList();
+      setState(() {
+        isLoading = false;
+      });
+    } else {
+      throw Exception('Failed to load photos');
+    }
+  }
+
+  Future<http.Response> postRequest () async {
+    var url ='https://api.yamisok.com/users/detail';
+
+    Map data = {
+      'token': 'mVI6uIsWeT3tqtHwJ1auDPGq7HXYpDKK2hQdezvZkfhezhNjWBSDZTmrOgyu',
+      'player_id':'17698'
+    };
+    //encode Map to JSON
+    var body = json.encode(data);
+
+    var response = await http.post(url,
+        headers: {"Content-Type": "application/json"},
+        body: body
+    );
+
+    Map decoded = jsonDecode(response.body);
+    Map raffle = decoded['raffle'];
+//    int id = raffle;
+    print("${decoded['result']['raffle']}");
+
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      margin: const EdgeInsets.only(bottom: 10.0),
+      color: Color(0xFF2f3336),
+      height: 50.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'You have 25 days left for your Subscription',
+            style: TextStyle(
+                fontSize: 12.0,
+                color: Color(0xFFcccccc),
+                fontWeight: FontWeight.bold),
+          ),
+          new GestureDetector(
+            onTap: (){
+//              _fetchData();
+              postRequest ();
+              print("Container clicked");
+            },
+            child: new Container(
+              height: 30.0,
+              width: 90.0,
+              decoration: new BoxDecoration(
+                color: backgroundYellow,
+                // ,
+                // border: new Border.all(
+                //     color: Colors.green,
+                //     width: 5.0,
+                //     style: BorderStyle.solid
+                // ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              ),
+              child: Center(
+                child: Text(
+                  'Filter',
+                  style: TextStyle(
+                      fontSize: 12.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              )
+            )
+          ),
+          
+        ],
+      ),
+    );
+  }
+}
+
+// class Tournament extends StatelessWidget{
+//   @override
+//   Widget build(BuildContext context){
+//     return new Container(
+//       child: new Center(
+//         child: new Column(
+//           children: <Widget>[
+//             new Padding(padding: new EdgeInsets.all(20.0),),
+//             new Text("On Progres Tray", style: new TextStyle(fontSize: 30.0),),
+//             new Padding(padding: new EdgeInsets.all(20.0),),
+//             new Text(
+//                       'y',
+//                     style: TextStyle(fontFamily: 'YamiFont', fontSize: 90.0,),),
+//           ],
+//         ),
+//       ), 
+//     );
+//   }
+// }
+
+
+
+
+
+
+//BACKUP#2
+
+import 'package:yamisok/component/all_library.dart'; 
+//  ApiServiceBannerTournament apiresult;
+//  List<ApiServiceBannerTournament> apiresult ;
+ List<Banner_result> listBanner;
+ List<String> listCarousel = [];
+// final store = new Store<Tournament>(,
+//     initialState: new Tournament.initial(), 
+//     middleware: [
+// //        SearchMiddleware(GithubApi()),
+//         EpicMiddleware<Tournament>(SearchEpic(GithubApi())),
+//       ]);
+
+class Tournament extends StatefulWidget {
+  static String tag = 'tournament-page'; 
+  // final Future<Banner_list_tour> post;
+  const Tournament({Key key}) : super(key: key);
+
+  @override
+  _maintournamentstate createState() => _maintournamentstate();
+}
+
+class _maintournamentstate extends State<Tournament> with SingleTickerProviderStateMixin{
+  ScrollController _scrollViewController;
+  ApiServiceBannerTournament apiresult;
+  
+  @override
+  void initState() {
+    super.initState();
+    apiresult = ApiServiceBannerTournament();
+  }
+  @override
+  Widget build(BuildContext context) { 
+    
+    return Center(
+      child: FutureBuilder<Banner_list_tour>(
+        future: apiresult.fetchPost(),
+        builder: (context, snapshot) {
+          // final w = snapshot.hasData;print("CEK BUILD BANNER0 : $snapshot,$w");
+          if (snapshot.hasData) { 
+            final x = snapshot.data.status;
+            final y = snapshot.data.message;
+            print("CEK BUILD BANNER1 : $x,$y");
+            listBanner = snapshot.data.result.listBanner ?? '';
+            final h = listBanner.length;
+            // final p = listBanner[0].name;
+            print("CEK BUILD BANNER2 : $h");
+ 
+            for(var i = 0; i < listBanner.length; i++){
+              final po = listBanner[i].game_cover_img;
+              print("LOOP DATA BANNER : $po");
+              listCarousel.add(po);
+            }
+
+            return new 
+              Scaffold(
+                backgroundColor: Color(0XFF22272B),
+                body: NestedScrollView(
+                  controller: _scrollViewController,
+                  headerSliverBuilder: (BuildContext context, bool boxIsScrolled) {
+                    return <Widget>[
+                      // PageBannerTour(listBanner)
+                      // PageBanner()
+                      BannerSlider()
+                    ];
+                  },
+                  body: PageOne(),
+                ),
+              );
+          }else{ 
+            print("BUILD MODEL FAILED ");
+            return Shimmers('Loading');
+          }
+        }
+      )
+    ); 
+ 
+    // Shimmers simer = new Shimmers('Loading'); 
+    // return simer;
+  
+  }
+ 
+}
+
+
+Widget noData(){
+  var listViewdt = new 
+  Container(height: 30.0,child: new Image.asset("assets/images/cookies.png",fit: BoxFit.cover));
+  var siemer = Shimmer.fromColors(
+    baseColor: Colors.grey[300],
+    highlightColor: Colors.grey[100],
+    child: Column(
+      children: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+          .map((_) => Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 48.0,
+                      height: 68.0,
+                      color: Colors.white,
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 8.0),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 8.0,
+                            color: Colors.white,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(vertical: 2.0),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 8.0,
+                            color: Colors.white,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(vertical: 2.0),
+                          ),
+                          Container(
+                            width: 40.0,
+                            height: 8.0,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ))
+          .toList(),
+    ),
+  );
+  return Container(
+    padding: const EdgeInsets.all(5.0), 
+    child: siemer
+  );
+}
+
+Widget PageBannerTour(List<Banner_result> item){
+ final ceklen = item; 
+ final p = ceklen[0].name;
+  var size = varMediaQuery;
+  final lengthItem = ceklen.length;  
+
+  final double itemWidth = (size.width - 10) / 3;
+
+  final double itemWidthCustum = (itemWidth * 2) + (itemWidth / 2); 
+      ((size.width - 10) / 3) + (itemWidth / 2) - 5;
+  final double itemHeight = (size.width - 10) / 3;
+  final double itemWidth2 = (size.width / 3) * 2;
+  print("CEK DATA BANNER : $p,$lengthItem");
+  var listViewdt = new 
+      Container( 
+        height: itemHeight,
+        child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: 20,
+        itemBuilder: (context, index) { 
+          // final avatarUrlnew = listBanner[index].game_cover_img; 
+          //print('CEK DATA BANNER 2 : $avatarUrlnew');
+          return noData();
+          // Container(
+          //   padding: const EdgeInsets.only(
+          //       left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
+          //   height: itemHeight,
+          //   width: itemWidthCustum,
+          //   child: new Container(
+          //     decoration: BoxDecoration(
+          //       border: Border.all(
+          //         color: Color(0xFF34424e),
+          //         width: 1,
+          //       ),
+          //       borderRadius: BorderRadius.all(Radius.circular(
+          //               10.0) //         <--- border radius here
+          //           ),
+          //     ) 
+          //   )
+          // );
+        },
+      )
+    );
+  // print('lihat data $listViewdt ');
+
+      
+  // return Container(
+  //   padding: const EdgeInsets.all(5.0), 
+  //   child: listViewdt
+  //   );
+}
+
+
+
+
+class PageBanner extends StatelessWidget {
+  
+  List items=[
+    'https://cdn.zeplin.io/5ce628d2578b652ab8bdaa79/assets/1b4aa2ad-fff0-4a25-93c5-d4be4f6e85ce.png',
+    'http://res.cloudinary.com/yamisok/image/upload/v1547721496/dailytournament/r0jdzhrdgmj2t1plazlk.jpg',
+    'https://res.cloudinary.com/yamisok/image/upload/h_400,f_auto/v1557502244/tournament/qe2vnuueeyuaeykutp1y.jpg'
+  ];
+
+  
+  
+  @override
+  Widget build(BuildContext context) {
+    return 
+    SliverAppBar(
+      pinned: true,
+      backgroundColor: Color(0XFF22272B),
+      expandedHeight: 200.0,
+      flexibleSpace: CarouselSlider(
+        height: 400.0,
+        items: listCarousel.map((i) {
+        // items: apiresult.map((i) {
+        // items: [1,2,3,4,5].map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                height: 200.0,
+                padding: const EdgeInsets.all(5.0),
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(
+                  color: Colors.black
+                ),
+                // child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+                child: FlexibleSpaceBar(
+                  background: Image.network('$i',fit: BoxFit.cover,),
+                  // title : Container( child: Text('text $i', style: TextStyle(fontSize: 11.0),) ),
+                ),
+              );
+            },
+          );
+        }).toList(),autoPlay: true, autoPlayAnimationDuration: new Duration(seconds: 2),
+      ), 
+    );
+  }
+}
+
+class PageOne extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemExtent: 200.0,
+      itemCount:10,
+      itemBuilder: (context, index) => Container(
+            padding: EdgeInsets.all(10.0),
+            child: Material(
+              elevation: 4.0,
+              borderRadius: BorderRadius.circular(5.0),
+              color: index % 2 == 0 ? Colors.cyan : Colors.deepOrange,
+              child: Center(
+                child: Text(index.toString()),
+              ),
+            ),
+          ),
+    );
+  }
+}
+
+
+
+//BACKUP#3
+
+import 'package:yamisok/component/all_library.dart';
+
+class maintournament extends StatefulWidget {
+  
+  @override
+  _maintournamentstate createState() => _maintournamentstate();
+}
+
+class _maintournamentstate extends State<maintournament> with SingleTickerProviderStateMixin{
+  ScrollController _scrollViewController;
+  var items=[
+    'https://cdn.zeplin.io/5ce628d2578b652ab8bdaa79/assets/1b4aa2ad-fff0-4a25-93c5-d4be4f6e85ce.png',
+    'http://res.cloudinary.com/yamisok/image/upload/v1547721496/dailytournament/r0jdzhrdgmj2t1plazlk.jpg',
+    'https://res.cloudinary.com/yamisok/image/upload/h_400,f_auto/v1557502244/tournament/qe2vnuueeyuaeykutp1y.jpg'
+  ] ;
+
+  @override
+  Widget build(BuildContext context) {
+    // final followMe = "Follow Me";
+    return Scaffold(
+      body: NestedScrollView(
+        controller: _scrollViewController,
+        headerSliverBuilder: (BuildContext context, bool boxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              pinned: true,
+              expandedHeight: 250.0,
+              flexibleSpace: CarouselSlider(
+                height: 400.0,
+                items: items.map((i) {
+                // items: [1,2,3,4,5].map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(
+                          color: Colors.amber
+                        ),
+                        // child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+                        child: FlexibleSpaceBar(
+                          background: Image.network('$i',fit: BoxFit.cover,),
+                          // title : Container(
+                          //   child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+                          // ),
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+              ), 
+            ),
+            SliverAppBar(
+              expandedHeight: 200.0,
+              // title: Text('Tab Controller Example'),
+              pinned: true,
+              floating: true,
+              forceElevated: boxIsScrolled,
+            )
+          ];
+        },
+        body: PageOne(),
+      ),
+    );
+  }
+}
+
+class PageOne extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemExtent: 250.0,
+      itemBuilder: (context, index) => Container(
+            padding: EdgeInsets.all(10.0),
+            child: Material(
+              elevation: 4.0,
+              borderRadius: BorderRadius.circular(5.0),
+              color: index % 2 == 0 ? Colors.cyan : Colors.deepOrange,
+              child: Center(
+                child: Text(index.toString()),
+              ),
+            ),
+          ),
+    );
+  }
+}

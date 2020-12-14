@@ -1,0 +1,139 @@
+{
+  "project_info": {
+    "project_number": "543971809365",
+    "firebase_url": "https://beta-yamisok.firebaseio.com",
+    "project_id": "beta-yamisok",
+    "storage_bucket": "beta-yamisok.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543971809365:android:7a9923182a121d27",
+        "android_client_info": {
+          "package_name": "com.yamisok.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543971809365-jjd5u3f0v94q9bref8nfb5jii57ejm8n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yamisok.app",
+            "certificate_hash": "e4112f629ecc1f7b069e35fa91e7b72bde54dd1b"
+          }
+        },
+        {
+          "client_id": "543971809365-rfj2kln8qhddo0pnd0k4ob923a1f5nmm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yamisok.app",
+            "certificate_hash": "cfd93736e563645d8c4239b09893402f013453ac"
+          }
+        },
+        {
+          "client_id": "543971809365-kv6fbj261srbfngllra4u979pbml9kg6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yamisok.app",
+            "certificate_hash": "d553eb8067153841d383bdf0f1a837e29641ce73"
+          }
+        },
+        {
+          "client_id": "543971809365-d2r5kkkaeqm5vjf90lppars4c0opljgj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yamisok.app",
+            "certificate_hash": "8b551db5ac2b747df26ab9214ae59fbfc7557c1b"
+          }
+        },
+        {
+          "client_id": "543971809365-m82qu4on17rrjpn0osurtv9010g5v366.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yamisok.app",
+            "certificate_hash": "80a66b0d5c66c2533f06e3587cfe222f185bd8a5"
+          }
+        },
+        {
+          "client_id": "543971809365-q2ppvcqavnsdndjliul4c595hgotecok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yamisok.app",
+            "certificate_hash": "8fe88c4963ad8a1f1a61a755d6be2bf5659e6f4b"
+          }
+        },
+        {
+          "client_id": "543971809365-tha8t1ofviior90v6g3775nlad8hleas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yamisok.app",
+            "certificate_hash": "3087a616fc5000283d950a20be619c8b4d399fc1"
+          }
+        },
+        {
+          "client_id": "543971809365-jltkl78gifbqmtcojk2ks6a6rns46v1t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLEMdyPBfwi9E3hQAQ6Nt-Xtw6wYfa9JE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543971809365-jltkl78gifbqmtcojk2ks6a6rns46v1t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "543971809365-tpsk7hu0p3numca8irljfp8ejlhfq5b8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yamisok.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543971809365:android:a5ff86bedf1a10e9b65cdc",
+        "android_client_info": {
+          "package_name": "com.yamisok.appsv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543971809365-jltkl78gifbqmtcojk2ks6a6rns46v1t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLEMdyPBfwi9E3hQAQ6Nt-Xtw6wYfa9JE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543971809365-jltkl78gifbqmtcojk2ks6a6rns46v1t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "543971809365-tpsk7hu0p3numca8irljfp8ejlhfq5b8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yamisok.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
